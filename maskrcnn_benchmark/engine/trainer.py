@@ -90,14 +90,14 @@ def do_train(
                         "eta: {eta}",
                         "iter: {iter}",
                         "{meters}",
-                        "lr: {lr:.6f}",
+                        "lr: {lr}",
                         "max mem: {memory:.0f}",
                     ]
                 ).format(
                     eta=eta_string,
                     iter=iteration,
                     meters=str(meters),
-                    lr=optimizer.param_groups[0]["lr"],
+                    lr=set(map(lambda x: '{:.6f}'.format(x['lr']), optimizer.param_groups)),
                     memory=torch.cuda.max_memory_allocated() / 1024.0 / 1024.0,
                 )
             )

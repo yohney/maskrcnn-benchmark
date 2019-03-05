@@ -72,6 +72,19 @@ class COCODataset(torchvision.datasets.coco.CocoDetection):
 
         boxes = [obj["bbox"] for obj in anno]
         boxes = torch.as_tensor(boxes).reshape(-1, 4)  # guard against no boxes
+
+        # import numpy
+        # open_cv_image = numpy.array(img) 
+        # # Convert RGB to BGR 
+        # open_cv_image = open_cv_image[:, :, ::-1].copy() 
+        # import cv2
+        # for b in boxes:
+        #     cv2.rectangle(open_cv_image, tuple(b[:2]), (b[0] + b[2], b[1] + b[3]), (0, 255, 0))
+
+        # cv2.imshow('dsfdsf', open_cv_image)
+        # cv2.waitKey(0)
+        # exit(0)
+
         target = BoxList(boxes, img.size, mode="xywh").convert("xyxy")
 
         classes = [obj["category_id"] for obj in anno]
